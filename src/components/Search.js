@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { Loader } from './Loader';
+// import { SearchIcon } from 'react-icons/BiSearch';
+
 
 export const Search = () => {
     const [result, setResult] = useState([]);
@@ -28,14 +30,21 @@ export const Search = () => {
 
     return (
         <div className="p-4">
-            <h1 className="text-2xl font-bold mb-4">Home</h1>
-            <input
-                type="text"
-                placeholder="Search"
-                onChange={(e) => handleChange(e)}
-                className="border rounded p-2 w-full mb-4"
-            />
-            <h2 className="text-lg font-semibold mb-2">Result: </h2>
+            <div className="relative">
+                <input
+                    type="text"
+                    placeholder="Article name or keywords"
+                    onChange={(e) => handleChange(e)}
+
+                    className="h-14 w-96 pl-10 pr-20 rounded-lg z-0 focus:shadow focus:outline-none text-black font-bold border border-black"
+
+                />
+                <i className="fa fa-search text-black absolute left-3 top-1/2 transform -translate-y-1/2 z-20"></i>
+                <button className="h-10 w-20 text-white rounded-lg bg-black ml-2">
+                    Search
+                </button>
+            </div>
+
             <div className="flex flex-wrap items-center justify-center">
                 {
                     isLoading ? <Loader /> : result.map((item, index) => (
