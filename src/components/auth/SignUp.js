@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { signUpWithEmailAndPassword } from '../../firebase';
+import { logOut, signUpWithEmailAndPassword } from '../../firebase';
 import { Loader } from '../Loader';
 
 export const SignUp = () => {
@@ -24,7 +24,10 @@ export const SignUp = () => {
         await signUpWithEmailAndPassword(formData.email, formData.password).then((user) => {
             alert(`Account Created!`);
             navigate("/")
-        }).catch((error) => {
+            logOut();
+            
+        })
+        .catch((error) => {
             alert(error.message);
         });
         setIsLoading(false);
