@@ -1,22 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import { useContext } from "react";
+import { UserContext } from "../context/user";
+import { Search } from "./Search";
+import { WelcomePage } from "./page/WelcomePage";
+import { Footer } from "../Footer";
 
 export const Home = () => {
-    const [search, setSearch] = useState('')
-
-    const handleSearch = async (e) => {
-        const { value } = e.target
-
-        setSearch(value)
-    }
-
-    useEffect(() => {
-    }, [search])
-
+    const { currentUser } = useContext(UserContext)
     return (
-        <div>
-            <h1>Home</h1>
-            <input type="text" placeholder="Search" onChange={(e) => handleSearch(e)} />
-            <h2>Result: </h2>
+        <div className="flex flex-col min-h-screen flex-wrap">
+            <div className="flex-grow">
+                {currentUser ? <Search /> : <WelcomePage />}
+            </div>
+            <Footer />
         </div>
-    )
-}
+    );
+};
+

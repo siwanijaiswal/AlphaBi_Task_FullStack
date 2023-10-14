@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { signUpWithEmailAndPassword } from '../../firebase';
 import { Loader } from '../Loader';
 
@@ -10,6 +10,7 @@ export const SignUp = () => {
         confirmPassword: '',
     });
     const [isLoading, setIsLoading] = useState(false);
+    const navigate = useNavigate();
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -21,7 +22,8 @@ export const SignUp = () => {
         if (formData.password !== formData.confirmPassword) return alert('Passwords do not match!');
         setIsLoading(true);
         await signUpWithEmailAndPassword(formData.email, formData.password).then((user) => {
-            alert(`User ${user.user.email} has been created successfully!`);
+            alert(`Account Created!`);
+            navigate("/")
         }).catch((error) => {
             alert(error.message);
         });
@@ -75,7 +77,6 @@ export const SignUp = () => {
                         <button
                             type="submit"
                             className="w-full py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-                            disabled
                         >
                             Sign Up
                         </button>
@@ -83,7 +84,7 @@ export const SignUp = () => {
             </form>
             <p className="mt-4 text-center">
                 Already have an account?{' '}
-                <Link to="/login" className="text-blue-500 hover:underline">
+                <Link to="/" className="text-blue-500 hover:underline">
                     LOGIN
                 </Link>
             </p>

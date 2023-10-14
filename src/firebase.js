@@ -3,7 +3,8 @@ import { initializeApp } from "firebase/app";
 import {
     getAuth,
     createUserWithEmailAndPassword,
-    signInWithEmailAndPassword
+    signInWithEmailAndPassword,
+    onAuthStateChanged
 } from "firebase/auth";
 
 /*Firebase configuration */
@@ -29,4 +30,12 @@ export const signUpWithEmailAndPassword = async (email, password) => {
 export const signInAuthUserWithEmailAndPassword = async (email, password) => {
     if (!email || !password) return
     return await signInWithEmailAndPassword(auth, email, password)
+}
+
+export const onAuthStateChangedListner = (callback) => {
+    return onAuthStateChanged(auth, callback)
+}
+
+export const logOut = async () => {
+    return auth.signOut()
 }

@@ -20,7 +20,6 @@ export const LogIn = () => {
         e.preventDefault();
         setIsLoading(true);
         await signInAuthUserWithEmailAndPassword(formData.email, formData.password).then((user) => {
-            alert(`User ${user.user.email} has been logged in successfully!`);
             navigate('/');
         }).catch((error) => {
             alert(error.message);
@@ -29,7 +28,7 @@ export const LogIn = () => {
     };
 
     return (
-        <div className="w-1/3 mx-auto mt-8 p-4 bg-gray-100 rounded-lg">
+        <div className="w-full  p-4 bg-gray-100 rounded-lg">
             <h2 className="text-2xl font-bold text-center">Login</h2>
             <form onSubmit={handleSubmit}>
                 <div className="mb-4">
